@@ -3,15 +3,16 @@ const url = require('url');
 
 
 
-function start() {
+function start(route) {
 
     function onRequest(request, response) {
 
-         let pathname = url.parse(request.url).pathname// parse是旧版api
+        let pathname = url.parse(request.url).pathname// parse是旧版api
         // const pathname = new URL(request.url).pathname
-        console.log(request.url);
-        console.log(pathname);
-        console.log(`Request for  received.`);
+        console.log(`Request for ${pathname} received.`);
+
+        route(pathname)
+
         response.writeHead(200, { "Content-Type": "text/plain" });
         response.write("Hello World");
         response.end();
